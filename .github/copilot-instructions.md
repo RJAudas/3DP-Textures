@@ -30,5 +30,5 @@ This repository is currently a Spec Kit/Copilot scaffold. There is no product so
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan at
-`specs/001-texture-geometry-research/plan.md`.
+`specs/002-printable-texture-addon/plan.md`.
 <!-- SPECKIT END -->
