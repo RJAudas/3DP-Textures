@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Blender
+*.blend1
+*.blend2
+
+# Build artifacts
+/dist/
+*.zip
+
+# Local STL exports / test output
+*.stl
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp

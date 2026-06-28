@@ -1,0 +1,27 @@
+schema_version = "1.0.0"
+
+id = "tdp_textures"
+version = "1.0.0"
+name = "Texture to Geometry (3D-Print Textures)"
+tagline = "Turn surface textures into real, printable mesh relief"
+maintainer = "3DP Textures"
+type = "add-on"
+
+website = "https://github.com/RJAudas/3DP-Textures"
+
+tags = ["Mesh", "3D View"]
+
+blender_version_min = "4.2.0"
+
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "Import height-map images and export STL models to disk"
+
+[build]
+paths_exclude_pattern = [
+  "__pycache__/",
+  "/.*",
+  "tests/",
+  "*.zip",
+]
