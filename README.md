@@ -45,40 +45,27 @@ These goals are the binding principles of the project — see
 
 - **Blender 4.2 LTS or newer** (declared baseline; developed/tested against 5.1).
 
-## Install (from disk)
+## Build & install
 
-1. Build the extension zip (optional — you can also point Blender at the source folder):
-   ```powershell
-   blender --command extension build --source-dir .\tdp_textures --output-dir .\dist
-   ```
-2. In Blender: **Edit ▸ Preferences ▸ Get Extensions ▸ Install from Disk…** and select
-   `dist\tdp_textures-1.0.0.zip` (or the `tdp_textures` folder), then enable it.
-3. Press `N` in the 3D Viewport and confirm the **"Texture → Geometry"** tab appears.
+```powershell
+# Build the extension zip (or skip and install the tdp_textures/ folder directly)
+blender --command extension build --source-dir .\tdp_textures --output-dir .\dist
+```
 
-Reload check: disable and re-enable the extension — the console must show no errors and
-the panel must disappear/reappear cleanly (symmetric `register()`/`unregister()`).
+In Blender: **Edit ▸ Preferences ▸ Get Extensions ▸ Install from Disk…**, select
+`dist\tdp_textures-1.0.0.zip` (or the `tdp_textures` folder), and enable it. Press `N`
+in the 3D Viewport — a **"Texture → Geometry"** tab appears.
 
-## Usage
+## Quick start
 
-### 1. Texture → printable STL (Wood preset)
+1. Select a mesh (e.g. **Add ▸ Mesh ▸ Cylinder**).
+2. In the **Texture → Geometry** N-panel, pick the **Wood** preset → **Apply Texture**.
+   Relief previews live; tweak **Strength (mm)** / **Scale** and it updates in real time.
+3. **Export STL…** — the relief is baked into the file, so it slices and prints.
 
-1. Add a mesh (e.g. **Add ▸ Mesh ▸ Cylinder**).
-2. Open the **Texture → Geometry** N-panel, pick the **Wood** preset, click **Apply Texture**.
-   Ring/grain relief appears live as a non-destructive Subsurf + Displace modifier stack.
-3. Click **Export STL…**, choose a path. The exported triangles carry the relief
-   (`apply_modifiers=True`), so it slices and prints.
-
-### 2. Adjust & preview, non-destructively
-
-- Change **Strength (mm)** / **Scale** — the viewport updates live.
-- **Clear** (or `Ctrl+Z`) fully restores the base mesh. Use **Apply now** to bake the
-  relief into permanent geometry only when you choose to.
-
-### 3. Other shapes & a custom image source
-
-- The same workflow runs on planes and spheres (Direction = Normal wraps curved surfaces).
-- Open **Advanced ▸ Strategy ▸ Image** and load a grayscale height-map to drive relief
-  from your own image (UVs recommended; a warning is shown on curved shapes without UVs).
+Tips: **Clear** (or `Ctrl+Z`) restores the original mesh non-destructively; **Apply now**
+bakes relief into permanent geometry; **Advanced ▸ Strategy ▸ Image** drives relief from
+your own grayscale height-map.
 
 ## Headless validation (required)
 
@@ -100,12 +87,3 @@ image/height-map as fallback) are documented in
 [`specs/001-texture-geometry-research/deliverables/`](specs/001-texture-geometry-research/deliverables/)
 and the feature design lives in
 [`specs/002-printable-texture-addon/`](specs/002-printable-texture-addon/).
-
-## Workflow (in Blender)
-
-1. Select a mesh object (cylinder, cube, custom model).
-2. Open the 3DP-Textures panel in the 3D Viewport N-panel.
-3. Choose a texture-to-geometry strategy and dial in strength, scale, and coordinate
-   mode — preview live and non-destructively.
-4. Apply/bake the displacement into real geometry when you're happy.
-5. Export STL with modifiers applied, so the texture prints.
