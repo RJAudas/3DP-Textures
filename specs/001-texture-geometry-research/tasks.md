@@ -37,10 +37,10 @@ authored and reviewed independently. All paths are relative to the repository ro
 
 **Purpose**: Create the deliverable/tooling structure and authoring environment.
 
-- [ ] T001 Create the deliverable and output structure: `specs/001-texture-geometry-research/deliverables/`, `tools/`, and `docs/` directories, each with empty skeleton placeholder files (`deliverables/00-overview.md`, `approaches.md`, `prior-art.md`, `addon-workflow.md`, `references.md`, `summary.md`) containing only their top H1 title
-- [ ] T002 Install and verify the HTML-build dependency: `pip install markdown`; confirm `python -c "import markdown"` succeeds and record the version in `specs/001-texture-geometry-research/quickstart.md` Prerequisites
-- [ ] T003 [P] Implement `tools/build_docs.py` per `specs/001-texture-geometry-research/contracts/html-build-contract.md` (renders `deliverables/summary.md` → `docs/index.html`, embedded CSS, `--check` mode, clear error if source/markdown missing)
-- [ ] T004 [P] Implement `tools/check_deliverable.py` per `specs/001-texture-geometry-research/contracts/validation-contract.md` checks C1–C6 (file presence, required sections, approach completeness, citation integrity, controls coverage, prior-art coverage)
+- [X] T001 Create the deliverable and output structure: `specs/001-texture-geometry-research/deliverables/`, `tools/`, and `docs/` directories, each with empty skeleton placeholder files (`deliverables/00-overview.md`, `approaches.md`, `prior-art.md`, `addon-workflow.md`, `references.md`, `summary.md`) containing only their top H1 title
+- [X] T002 Install and verify the HTML-build dependency: `pip install markdown`; confirm `python -c "import markdown"` succeeds and record the version in `specs/001-texture-geometry-research/quickstart.md` Prerequisites
+- [X] T003 [P] Implement `tools/build_docs.py` per `specs/001-texture-geometry-research/contracts/html-build-contract.md` (renders `deliverables/summary.md` → `docs/index.html`, embedded CSS, `--check` mode, clear error if source/markdown missing)
+- [X] T004 [P] Implement `tools/check_deliverable.py` per `specs/001-texture-geometry-research/contracts/validation-contract.md` checks C1–C6 (file presence, required sections, approach completeness, citation integrity, controls coverage, prior-art coverage)
 
 ---
 
@@ -51,8 +51,8 @@ authored and reviewed independently. All paths are relative to the repository ro
 **⚠️ CRITICAL**: No user-story authoring should finalize until these exist — all stories rely
 on the glossary and the citation scheme.
 
-- [ ] T005 Author `specs/001-texture-geometry-research/deliverables/00-overview.md` with required sections `## Purpose & Scope`, `## Glossary`, `## How to Read This Set`, `## Out of Scope` (mark material/shader-only methods out of scope per FR-011), framed geometry-first per the constitution
-- [ ] T006 Establish the citation scheme in `specs/001-texture-geometry-research/deliverables/references.md`: create the `## References` section and document the `[S]`/`[M]`/`[T]`/`[W]` tag convention (source/manual/TOC/web) that all stories cite into (FR-010)
+- [X] T005 Author `specs/001-texture-geometry-research/deliverables/00-overview.md` with required sections `## Purpose & Scope`, `## Glossary`, `## How to Read This Set`, `## Out of Scope` (mark material/shader-only methods out of scope per FR-011), framed geometry-first per the constitution
+- [X] T006 Establish the citation scheme in `specs/001-texture-geometry-research/deliverables/references.md`: create the `## References` section and document the `[S]`/`[M]`/`[T]`/`[W]` tag convention (source/manual/TOC/web) that all stories cite into (FR-010)
 
 **Checkpoint**: Shared framing + citation system ready — user stories can begin.
 
@@ -67,13 +67,13 @@ approaches ending in one justified primary recommendation plus a fallback.
 approach, its top reason, and one fallback; each approach lists mechanism, inputs, controls,
 strengths, limitations, print-readiness, and export behavior, each with a citation.
 
-- [ ] T007 [P] [US1] Research the Displace-modifier + procedural Texture approach over a subdivided mesh from local refs (`D:\dev\blender\blender-manual\manual\modeling\modifiers\deform\displace.rst`, `D:\dev\blender\blender\source\blender\modifiers\intern\MOD_displace.cc`, `rna_modifier.cc`, `DNA_texture_types.h`, `rna_texture.cc`); capture notes + candidate citation tags in `specs/001-texture-geometry-research/deliverables/approaches.md` working notes
-- [ ] T008 [P] [US1] Research the image/height-map displacement approach (UV/coordinate-driven) from local refs (`displace.rst` `texture_coords='UV'`, `D:\dev\blender\blender-manual\manual\render\shader_nodes\input\texture_coordinate.rst`); capture notes for `approaches.md`
-- [ ] T009 [P] [US1] Research the Geometry Nodes / node-based displacement approach (`D:\dev\blender\blender-manual\manual\modeling\modifiers\introduction.rst` GN-as-custom-modifier, plus reputable web sources for GN displacement patterns); capture notes for `approaches.md`
-- [ ] T010 [P] [US1] Research STL export behavior with `apply_modifiers=True` (`D:\dev\blender\blender-manual\manual\files\import_export\stl.rst`, `D:\dev\blender\blender\source\blender\editors\io\io_stl_ops.cc`, `D:\dev\blender\blender\source\blender\io\stl\exporter\stl_export.cc`); capture export-behavior notes for each approach
-- [ ] T011 [US1] Author `## Approaches Overview`, `## Comparison Matrix`, and one `## Approach: <name>` section per approach (≥2, target 3) in `specs/001-texture-geometry-research/deliverables/approaches.md` using the Approach schema from `data-model.md`, each with ≥1 citation tag (depends on T007–T010)
-- [ ] T012 [US1] Author `## Recommendation` (exactly one primary + ≥1 fallback, justified — FR-004) and `## Subdivision & Print-Scale Guidance` (mm-scale density vs. fidelity vs. performance — FR-009) in `specs/001-texture-geometry-research/deliverables/approaches.md`
-- [ ] T013 [US1] Add all approach/mechanism/export citation tags used in `approaches.md` to `## References` in `specs/001-texture-geometry-research/deliverables/references.md`
+- [X] T007 [P] [US1] Research the Displace-modifier + procedural Texture approach over a subdivided mesh from local refs (`D:\dev\blender\blender-manual\manual\modeling\modifiers\deform\displace.rst`, `D:\dev\blender\blender\source\blender\modifiers\intern\MOD_displace.cc`, `rna_modifier.cc`, `DNA_texture_types.h`, `rna_texture.cc`); capture notes + candidate citation tags in `specs/001-texture-geometry-research/deliverables/approaches.md` working notes
+- [X] T008 [P] [US1] Research the image/height-map displacement approach (UV/coordinate-driven) from local refs (`displace.rst` `texture_coords='UV'`, `D:\dev\blender\blender-manual\manual\render\shader_nodes\input\texture_coordinate.rst`); capture notes for `approaches.md`
+- [X] T009 [P] [US1] Research the Geometry Nodes / node-based displacement approach (`D:\dev\blender\blender-manual\manual\modeling\modifiers\introduction.rst` GN-as-custom-modifier, plus reputable web sources for GN displacement patterns); capture notes for `approaches.md`
+- [X] T010 [P] [US1] Research STL export behavior with `apply_modifiers=True` (`D:\dev\blender\blender-manual\manual\files\import_export\stl.rst`, `D:\dev\blender\blender\source\blender\editors\io\io_stl_ops.cc`, `D:\dev\blender\blender\source\blender\io\stl\exporter\stl_export.cc`); capture export-behavior notes for each approach
+- [X] T011 [US1] Author `## Approaches Overview`, `## Comparison Matrix`, and one `## Approach: <name>` section per approach (≥2, target 3) in `specs/001-texture-geometry-research/deliverables/approaches.md` using the Approach schema from `data-model.md`, each with ≥1 citation tag (depends on T007–T010)
+- [X] T012 [US1] Author `## Recommendation` (exactly one primary + ≥1 fallback, justified — FR-004) and `## Subdivision & Print-Scale Guidance` (mm-scale density vs. fidelity vs. performance — FR-009) in `specs/001-texture-geometry-research/deliverables/approaches.md`
+- [X] T013 [US1] Add all approach/mechanism/export citation tags used in `approaches.md` to `## References` in `specs/001-texture-geometry-research/deliverables/references.md`
 
 **Checkpoint**: `approaches.md` is complete and independently reviewable (MVP).
 
@@ -88,12 +88,12 @@ and `prior-art.md` (how others do it + existing add-ons informing the design).
 cylinder→wood→place/size→apply-or-defer→export journey and list the six controls with
 defaults; `prior-art.md` names ≥2 community workflows/add-ons with gaps and sources.
 
-- [ ] T014 [P] [US2] Web research (local-primary, web-supplemental per spec clarification): how others apply textures to objects for 3D printing in Blender (workflows) and existing add-ons/plugins that do part of this; capture entries + `[W]` sources in `specs/001-texture-geometry-research/deliverables/prior-art.md` working notes
-- [ ] T015 [US2] Author `specs/001-texture-geometry-research/deliverables/prior-art.md` with `## Community Workflows`, `## Existing Add-ons / Plugins`, and `## Gaps & Opportunities` — ≥2 PriorArtEntry records total, each with a `[W]` web citation (FR-014, SC-007) (depends on T014)
-- [ ] T016 [US2] Author `## Proposed User Journey` in `specs/001-texture-geometry-research/deliverables/addon-workflow.md` as ordered WorkflowSteps covering add cylinder → open panel → pick texture preset → place/size → preview → apply-or-defer → STL export (FR-005)
-- [ ] T017 [US2] Author `## Controls` (the six required controls — texture selection, strength, scale, coordinate mode, direction, mid-level — each with purpose + default; texture-pick documented as preset **and** advanced) and `## Texture Presets` (Wood fully specified, Brick + Rock named) in `specs/001-texture-geometry-research/deliverables/addon-workflow.md` (FR-006, clarification Q3)
-- [ ] T018 [US2] Author `## Apply Now vs. Defer to Export` (both branches; non-destructive default; note un-applied modifiers are realized at export via `apply_modifiers=True`) and `## Generalization to Other Shapes` (beyond cylinders; placement/seam caveats) in `specs/001-texture-geometry-research/deliverables/addon-workflow.md` (FR-007, FR-008)
-- [ ] T019 [US2] Add all workflow/control/export/prior-art citation tags used in `addon-workflow.md` and `prior-art.md` to `## References` in `specs/001-texture-geometry-research/deliverables/references.md`
+- [X] T014 [P] [US2] Web research (local-primary, web-supplemental per spec clarification): how others apply textures to objects for 3D printing in Blender (workflows) and existing add-ons/plugins that do part of this; capture entries + `[W]` sources in `specs/001-texture-geometry-research/deliverables/prior-art.md` working notes
+- [X] T015 [US2] Author `specs/001-texture-geometry-research/deliverables/prior-art.md` with `## Community Workflows`, `## Existing Add-ons / Plugins`, and `## Gaps & Opportunities` — ≥2 PriorArtEntry records total, each with a `[W]` web citation (FR-014, SC-007) (depends on T014)
+- [X] T016 [US2] Author `## Proposed User Journey` in `specs/001-texture-geometry-research/deliverables/addon-workflow.md` as ordered WorkflowSteps covering add cylinder → open panel → pick texture preset → place/size → preview → apply-or-defer → STL export (FR-005)
+- [X] T017 [US2] Author `## Controls` (the six required controls — texture selection, strength, scale, coordinate mode, direction, mid-level — each with purpose + default; texture-pick documented as preset **and** advanced) and `## Texture Presets` (Wood fully specified, Brick + Rock named) in `specs/001-texture-geometry-research/deliverables/addon-workflow.md` (FR-006, clarification Q3)
+- [X] T018 [US2] Author `## Apply Now vs. Defer to Export` (both branches; non-destructive default; note un-applied modifiers are realized at export via `apply_modifiers=True`) and `## Generalization to Other Shapes` (beyond cylinders; placement/seam caveats) in `specs/001-texture-geometry-research/deliverables/addon-workflow.md` (FR-007, FR-008)
+- [X] T019 [US2] Add all workflow/control/export/prior-art citation tags used in `addon-workflow.md` and `prior-art.md` to `## References` in `specs/001-texture-geometry-research/deliverables/references.md`
 
 **Checkpoint**: Workflow + prior-art deliverables complete and independently reviewable.
 
@@ -107,9 +107,9 @@ to a real source/manual/TOC path or web URL.
 **Independent Test**: Pick any 3 claims at random across the deliverables — each has a
 citation tag that resolves to a real local path or URL in `references.md`.
 
-- [ ] T020 [US3] Consolidate and complete `specs/001-texture-geometry-research/deliverables/references.md`: every `[S]`/`[M]`/`[T]`/`[W]` tag defined with its `type`, `location` (real path or URL), and the claim it supports (FR-010)
-- [ ] T021 [US3] Audit all `specs/001-texture-geometry-research/deliverables/*.md`: confirm every major claim (approach mechanism, control behavior, STL export behavior) carries ≥1 resolvable citation tag; add missing tags/sources (SC-003 = 100%, SC-005 no invented APIs)
-- [ ] T022 [US3] Run `python tools/check_deliverable.py` citation-integrity check (C4) and fix any undefined or dangling tags until it passes
+- [X] T020 [US3] Consolidate and complete `specs/001-texture-geometry-research/deliverables/references.md`: every `[S]`/`[M]`/`[T]`/`[W]` tag defined with its `type`, `location` (real path or URL), and the claim it supports (FR-010)
+- [X] T021 [US3] Audit all `specs/001-texture-geometry-research/deliverables/*.md`: confirm every major claim (approach mechanism, control behavior, STL export behavior) carries ≥1 resolvable citation tag; add missing tags/sources (SC-003 = 100%, SC-005 no invented APIs)
+- [X] T022 [US3] Run `python tools/check_deliverable.py` citation-integrity check (C4) and fix any undefined or dangling tags until it passes
 
 **Checkpoint**: All claims traceable; citation integrity check passes.
 
@@ -119,11 +119,11 @@ citation tag that resolves to a real local path or URL in `references.md`.
 
 **Purpose**: Build the user-facing HTML review surface and run final validation.
 
-- [ ] T023 Author `specs/001-texture-geometry-research/deliverables/summary.md` (curated, non-technical) with `## Recommendation at a Glance`, `## Approaches (Short)`, `## Proposed Workflow (Short)`, and `## Open Questions & Next Step` (FR-012, SC-001, SC-006)
-- [ ] T024 Generate the review page: run `python tools/build_docs.py` to produce `docs/index.html`; open it in a browser and confirm it renders offline with a table of contents and the recommendation up top (C7)
-- [ ] T025 [P] Run full automated validation: `python tools/check_deliverable.py` (C1–C6) and `python tools/build_docs.py --check` (C7); fix any failures until both exit 0
-- [ ] T026 [P] Manual review sign-off: walk `specs/001-texture-geometry-research/quickstart.md` and confirm spec Success Criteria SC-001…SC-007 (C8)
-- [ ] T027 Final consistency pass across the deliverable set in `specs/001-texture-geometry-research/deliverables/` (cross-links from `00-overview.md`, consistent terminology/glossary, recommendation matches between `approaches.md` and `summary.md`)
+- [X] T023 Author `specs/001-texture-geometry-research/deliverables/summary.md` (curated, non-technical) with `## Recommendation at a Glance`, `## Approaches (Short)`, `## Proposed Workflow (Short)`, and `## Open Questions & Next Step` (FR-012, SC-001, SC-006)
+- [X] T024 Generate the review page: run `python tools/build_docs.py` to produce `docs/index.html`; open it in a browser and confirm it renders offline with a table of contents and the recommendation up top (C7)
+- [X] T025 [P] Run full automated validation: `python tools/check_deliverable.py` (C1–C6) and `python tools/build_docs.py --check` (C7); fix any failures until both exit 0
+- [X] T026 [P] Manual review sign-off: walk `specs/001-texture-geometry-research/quickstart.md` and confirm spec Success Criteria SC-001…SC-007 (C8)
+- [X] T027 Final consistency pass across the deliverable set in `specs/001-texture-geometry-research/deliverables/` (cross-links from `00-overview.md`, consistent terminology/glossary, recommendation matches between `approaches.md` and `summary.md`)
 
 ---
 

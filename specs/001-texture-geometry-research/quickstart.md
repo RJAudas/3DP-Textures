@@ -10,7 +10,7 @@ runs and checks.
 ## Prerequisites
 
 - Python 3.12 (already present: `python --version`).
-- `python-markdown`: `pip install markdown`
+- `python-markdown`: `pip install markdown` (verified: **markdown 3.10.2**, Python 3.12.10)
 - The deliverable Markdown authored under
   `specs/001-texture-geometry-research/deliverables/` (produced in `/speckit.implement`).
 

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3DP-Textures — Approaches Review</title>
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6; max-width: 880px; margin: 0 auto; padding: 2rem 1.25rem;
+  color: #1b1b1b; background: #fdfdfc;
+}
+h1, h2, h3 { line-height: 1.25; }
+h1 { border-bottom: 3px solid #c47f3d; padding-bottom: .3rem; }
+h2 { border-bottom: 1px solid #e3ddd3; padding-bottom: .2rem; margin-top: 2rem; }
+a { color: #b3631f; }
+code, pre { font-family: SFMono-Regular, Consolas, Menlo, monospace; }
+pre { background: #f4f0ea; padding: .8rem 1rem; overflow-x: auto; border-radius: 6px; }
+code { background: #f4f0ea; padding: .1rem .35rem; border-radius: 4px; }
+pre code { background: none; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+th, td { border: 1px solid #ddd6cb; padding: .5rem .7rem; text-align: left; vertical-align: top; }
+th { background: #f4ede1; }
+blockquote { border-left: 4px solid #c47f3d; margin: 1rem 0; padding: .3rem 1rem; background: #faf6ef; }
+.toc { background: #faf6ef; border: 1px solid #e3ddd3; border-radius: 6px; padding: .5rem 1rem; }
+.toc ul { margin: .3rem 0; }
+.admonition { border-left: 4px solid #6a8caf; background: #f1f5f9; padding: .5rem 1rem; margin: 1rem 0; }
+.admonition-title { font-weight: 600; margin: 0; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #e3ddd3; color: #777; font-size: .9rem; }
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e1d8; background: #1b1a18; }
+  pre, code { background: #2a2824; }
+  th { background: #2a2824; }
+  blockquote, .toc { background: #232220; border-color: #38352f; }
+}
+</style>
+</head>
+<body>
+<main>
+<nav class="toc" aria-label="Table of contents">
+<strong>Contents</strong>
+<div class="toc">
+<ul>
+<li><a href="#texture-to-geometry-summary">Texture-to-Geometry — Summary</a><ul>
+<li><a href="#recommendation-at-a-glance">Recommendation at a Glance</a></li>
+<li><a href="#approaches-short">Approaches (Short)</a></li>
+<li><a href="#proposed-workflow-short">Proposed Workflow (Short)</a></li>
+<li><a href="#roadmap-at-a-glance">Roadmap at a Glance</a></li>
+<li><a href="#open-questions-next-step">Open Questions &amp; Next Step</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+</nav>
+<h1 id="texture-to-geometry-summary">Texture-to-Geometry — Summary</h1>
+<p>A short, non-technical review of the research. This is the page rendered to
+<code>docs/index.html</code>. Full detail and citations live in the other deliverables
+(<code>approaches.md</code>, <code>addon-workflow.md</code>, <code>prior-art.md</code>, <code>references.md</code>).</p>
+<h2 id="recommendation-at-a-glance">Recommendation at a Glance</h2>
+<p><strong>Use the Displace modifier with a procedural texture over a subdivided mesh, and export STL
+with "Apply Modifiers" on.</strong></p>
+<p>Top reason: it is the smallest, best-documented, fully native Blender path that produces
+<strong>real, printable, watertight geometry</strong> — no UV unwrap required — and displacing along the
+surface <strong>Normal</strong> wraps grain cleanly around cylinders and other curved shapes. The displaced
+surface becomes real triangles automatically at export, so nothing has to be baked or applied
+by hand.</p>
+<p><strong>Fallback:</strong> the same Displace modifier driven by a user <strong>image / height-map</strong> (via UV
+coordinates) when a <em>specific</em> real-world texture is needed — at the cost of a UV unwrap and
+possible seams on curved shapes.</p>
+<h2 id="approaches-short">Approaches (Short)</h2>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>What it is</th>
+<th>Best for</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A1 · Procedural Displace</strong> <em>(recommended)</em></td>
+<td>Wood/Noise/Voronoi math texture drives a Displace modifier over a subdivided mesh</td>
+<td>Cylinders &amp; curved shapes; quick procedural grain</td>
+<td>Detail capped by mesh density; not a photo match</td>
+</tr>
+<tr>
+<td><strong>A2 · Image Displace</strong> <em>(fallback)</em></td>
+<td>A grayscale height-map drives the same modifier via UV</td>
+<td>Reproducing a specific real texture</td>
+<td>Needs UV unwrap; seams/stretch on curves</td>
+</tr>
+<tr>
+<td><strong>A3 · Geometry Nodes</strong> <em>(deferred to v2)</em></td>
+<td>A node graph computes displacement as a custom modifier</td>
+<td>Combined/masked effects, power users</td>
+<td>Intentionally deferred — higher complexity than v1 needs</td>
+</tr>
+<tr>
+<td>A4 · Sculpt/multires <em>(excluded)</em></td>
+<td>Hand-sculpted/baked detail on a dense mesh</td>
+<td>Art-directed one-offs</td>
+<td>Intentionally excluded from automation</td>
+</tr>
+</tbody>
+</table>
+<p>All approaches end the same way: the live modifiers are realized into real geometry when the
+STL is exported with <strong>Apply Modifiers</strong>.</p>
+<p>The v1 choice — procedural <code>Texture</code> datablock + Displace modifier — is a <strong>deliberate
+engineering tradeoff</strong>: the simplest, most stable API that fully meets the goal. Blender's
+modern procedural stack (Geometry Nodes, shader nodes) is more flexible but is intentionally
+deferred to v2 because v1 values simplicity and reliable, print-ready output over maximum
+flexibility. See <code>approaches.md</code> for the full ADR, including <em>Explicit Non-Goals</em>, <em>Rejected
+Alternatives</em>, and the roadmap below.</p>
+<h2 id="proposed-workflow-short">Proposed Workflow (Short)</h2>
+<p>The proposed add-on turns this into a guided, print-aware experience:</p>
+<ol>
+<li>Select a mesh (e.g. a cylinder) and open the <strong>Texture → Geometry</strong> panel.</li>
+<li>Pick a <strong>preset</strong> — <em>Wood</em> (fully designed), with <em>Brick</em> and <em>Rock</em> planned.</li>
+<li>Adjust a few controls and preview live in the viewport.</li>
+<li><strong>Defer to export</strong> (recommended, non-destructive) or <strong>Apply now</strong>.</li>
+<li>Export STL — the displaced surface becomes real printable geometry.</li>
+</ol>
+<p><strong>The six controls:</strong> <em>Texture selection</em> (preset <strong>and</strong> advanced picker), <em>Strength</em> (relief
+depth in mm, default 0.4 mm), <em>Scale</em> (pattern size), <em>Coordinate mode</em> (default Local — no UV
+needed), <em>Direction</em> (default Normal — wraps curves), and <em>Mid-level</em> (default 0.5). Print-scale
+guidance ties subdivision density and Strength to real millimeters and printer resolution.</p>
+<h2 id="roadmap-at-a-glance">Roadmap at a Glance</h2>
+<p>The v1 architecture is intentionally conservative; later versions add capability behind the
+same controls without discarding the v1 foundation:</p>
+<ul>
+<li><strong>v1 (now):</strong> procedural Texture datablock → Displace modifier → auto Subdivision → STL with
+  Apply Modifiers.</li>
+<li><strong>v2:</strong> Geometry Nodes engine behind the same UI — layered textures, masks, blending.</li>
+<li><strong>v3+:</strong> AI-generated height maps, material libraries, advanced manufacturing textures,
+  selective displacement, parametric surface generators.</li>
+</ul>
+<h2 id="open-questions-next-step">Open Questions &amp; Next Step</h2>
+<p>Open questions / risks:</p>
+<ul>
+<li><strong>Cylinder/curved placement</strong> with image textures still fights UV seams and stretching;
+  procedural-along-Normal is the recommended way around it but should be validated on real
+  prints.</li>
+<li><strong>Geometry Nodes</strong> is intentionally deferred to v2 (a deliberate scope choice, not a gap);
+  when it graduates it will lean more on community sources for the displacement pattern.</li>
+<li><strong>Watertightness</strong> under high Strength on coarse meshes needs the 3D-Print Toolbox as a
+  validation post-step.</li>
+</ul>
+<p><strong>Single recommended next step:</strong> scope a follow-on feature to <strong>build the add-on around
+Approach A1</strong> — a panel that creates a procedural Wood Displace over auto-subdivided geometry
+(displace along Normal), previews live, advises print-scale in mm, and exports STL with
+<code>apply_modifiers=True</code> — with the image/height-map source (A2) as the first fallback option.</p>
+</main>
+<footer>Generated from <code>summary.md</code> on 2026-06-28.</footer>
+</body>
+</html>
