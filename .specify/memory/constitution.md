@@ -1,6 +1,12 @@
 <!--
 Sync Impact Report
 ==================
+Version change: 1.0.0 → 1.0.1
+Rationale: PATCH — added a "Reference Materials" section recording the authoritative
+local Blender source tree, manual, and add-on reference TOC paths for this project.
+No principles changed.
+
+Prior entry:
 Version change: TEMPLATE (unversioned) → 1.0.0
 Rationale: Initial ratification — all placeholder tokens replaced with concrete,
 project-specific principles for a 3D-print texture-to-geometry Blender add-on.
@@ -154,6 +160,21 @@ automated mesh assertions are the only reliable guard for print-ready output.
   default behavior, skipped validation) MUST be recorded in the plan's Complexity
   Tracking table with justification and the rejected simpler alternative.
 
+## Reference Materials
+
+The following local resources are authoritative references for research, planning, and
+implementation. Plans and specs SHOULD cite them when justifying a technical approach:
+
+- **Blender source tree**: `D:\dev\blender\blender` — C/C++ internals and bundled Python
+  (`scripts/templates_py/`, `scripts/addons_core/`, `scripts/startup/bl_ui/`,
+  `source/blender/modifiers/`, `source/blender/io/stl/`) for ground-truth API/behavior.
+- **Blender manual**: `D:\dev\blender\blender-manual` — user-facing documentation for
+  add-ons/extensions, modifiers (Displace), textures, coordinates, and STL export.
+- **Add-on reference TOC**: `D:\dev\blender\blender-plugin-reference-toc.md` — a curated
+  map of the most relevant source files and manual pages for this project, with the
+  rationale for each, plus starter Python snippets (Displace modifier, STL export,
+  evaluated-mesh access).
+
 ## Governance
 
 This constitution supersedes other practices for the 3DP-Textures add-on. All plans,
@@ -171,4 +192,4 @@ reject changes that violate a MUST without a documented, approved exception.
   failure that blocks merge. Use the active feature `plan.md` for runtime development
   guidance.
 
-**Version**: 1.0.0 | **Ratified**: 2026-06-28 | **Last Amended**: 2026-06-28
+**Version**: 1.0.1 | **Ratified**: 2026-06-28 | **Last Amended**: 2026-06-28
